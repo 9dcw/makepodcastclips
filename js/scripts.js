@@ -41,8 +41,8 @@ fetch(RSS_URL2)
       });
 
 
-    }
-  )}
+    })
+  }
 
 
 window.addEventListener('DOMContentLoaded', event => {
