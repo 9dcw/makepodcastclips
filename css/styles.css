@@ -42,12 +42,18 @@
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-primary-rgb: 7, 114, 157;
+  --bs-ninjagreen-rgb: 7, 114, 157;
+
   /* https://convertingcolors.com/rgb-color-115_157_7.html?search=RGB(115,%20157,%207) */
 
   /*--bs-primary-rgb: 26, 188, 156;*/
 
   /*bs-secondary-rgb: 44, 62, 80;*/
-  --bs-secondary-rgb: 115, 157, 7;
+
+  --bs-secondary-rgb: 38, 38, 38;
+
+  --bs-ninjagrey-rgb: 38, 38, 38;
+
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -7714,7 +7720,7 @@ textarea.form-control-lg {
 
 .text-secondary {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+  color: rgba(var(--bs-ninjagreen-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-success {
@@ -7797,6 +7803,7 @@ textarea.form-control-lg {
 .text-opacity-100 {
   --bs-text-opacity: 1;
 }
+
 
 .bg-primary {
   --bs-bg-opacity: 1;
