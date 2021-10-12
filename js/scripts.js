@@ -34,8 +34,8 @@ fetch(RSS_URL2)
       )
     })
 
-    let test_mp3+url = 'https://www.buzzsprout.com/126848/9310030-joe-henrich-on-cultural-evolution.mp3'
-    
+    let test_mp3_url = 'https://www.buzzsprout.com/126848/9310030-joe-henrich-on-cultural-evolution.mp3'
+
   }
 
 
