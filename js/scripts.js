@@ -9,17 +9,11 @@
 
 function get_clip() {
   var elID = event.target.id;
-  console.log(elID);
   target_el = elID.replace('-button','')
-  console.log(target_el);
-
   var RSS_URL = document.getElementById(target_el).value;
-  console.log(RSS_URL);
 
-  // I need to go get the rss feed information and present something in the log);
-  console.log('test');
   console.log(RSS_URL)
-  const RSS_URL2 = `https://codepen.io/picks/feed/`;
+  var RSS_URL2 = `https://feeds.buzzsprout.com/126848.rss`;
 
 fetch(RSS_URL2)
   .then(response => response.text())
