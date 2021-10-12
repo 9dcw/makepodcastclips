@@ -15,6 +15,11 @@ function get_clip() {
   console.log(RSS_URL)
   var RSS_URL2 = `https://feeds.buzzsprout.com/126848.rss`;
 
+// for a random element
+//const randomElement = array[Math.floor(Math.random() * array.length)];
+// then I send that to the server!
+
+
 fetch(RSS_URL2)
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
@@ -29,9 +34,9 @@ fetch(RSS_URL2)
     items.forEach(el => {
       console.log(el.querySelector("title"))
       console.log(el.querySelector("enclosure"))
-      console.log(el.querySelector("enclosure").getAttribute(url))
+      console.log(el.querySelector("enclosure").getAttribute('url'))
 
-      
+
       //console.log(el.querySelector("podcast: transcript").url)
         }
       )
