@@ -23,7 +23,7 @@ fetch(RSS_URL2)
     console.log(data.querySelector("channel"))
     console.log(data.querySelector("channel").querySelector("title"))
     console.log(data.querySelector("channel").querySelector("description"))
-    const items = data.querySelector("channel").querySelector("item");
+    const items = data.querySelector("channel").querySelectorAll("item");
 
     items.forEach(el => {
       console.log(el.querySelector("title"))
