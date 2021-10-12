@@ -9,6 +9,7 @@
 
 function get_clip() {
   var elID = event.target.id;
+  target_el = elID.replace('-button','')
   var RSS_URL = document.getElementById(elID).value;
 
   // I need to go get the rss feed information and present something in the log);
