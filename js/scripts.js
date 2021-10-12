@@ -20,8 +20,6 @@ fetch(RSS_URL2)
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
     console.log(data);
-    console.log(data.getElementsByTagName("channel").nodeValue);
-    console.log(data.getElementsByTagName("channel.title").nodeValue)
 
     console.log(data.querySelector("channel"))
     console.log(data.querySelector("channel").querySelector("title"))
@@ -31,7 +29,7 @@ fetch(RSS_URL2)
     items.forEach(el => {
       console.log(el.querySelector("title"))
       console.log(el.querySelector("enclosure").url)
-      console.log(el.querySelector("podcast: transcript").url)
+      //console.log(el.querySelector("podcast: transcript").url)
         }
       )
 
