@@ -28,22 +28,14 @@ fetch(RSS_URL2)
 
     items.forEach(el => {
       console.log(el.querySelector("title"))
-      console.log(el.querySelector("enclosure").url)
+      console.log(el.querySelector("enclosure"))
       //console.log(el.querySelector("podcast: transcript").url)
         }
       )
     })
 
-    $.get(RSS_URL2, function (data2) {
-    $(data2).find("item").each(function () { // or "item" or whatever suits your feed
-        var el2 = $(this);
-        console.log("------------------------");
-        console.log("title      : " + el2.find("title").text());
-        console.log("description: " + el2.find("description").text());
-      });
-
-
-    })
+    let test_mp3+url = 'https://www.buzzsprout.com/126848/9310030-joe-henrich-on-cultural-evolution.mp3'
+    
   }
 
 
