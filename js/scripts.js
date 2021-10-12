@@ -32,6 +32,8 @@ fetch(RSS_URL2)
       //console.log(el.querySelector("podcast: transcript").url)
         }
       )
+    })
+
     $.get(RSS_URL2, function (data2) {
     $(data2).find("item").each(function () { // or "item" or whatever suits your feed
         var el2 = $(this);
