@@ -14,9 +14,9 @@ function get_clip() {
   // I need to go get the rss feed information and present something in the log);
   console.log('test');
   console.log(RSS_URL)
-  const RSS_URL = `https://codepen.io/picks/feed/`;
+  const RSS_URL2 = `https://codepen.io/picks/feed/`;
 
-fetch(RSS_URL)
+fetch(RSS_URL2)
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => console.log(data))
@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', event => {
     if (mainNav) {
         new bootstrap.ScrollSpy(document.body, {
             target: '#mainNav',
-            offset: 72,
+            offset: 50,
         });
     };
 
