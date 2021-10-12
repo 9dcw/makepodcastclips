@@ -23,7 +23,7 @@ fetch(RSS_URL2)
     console.log(data.querySelectorAll("channel").querySelectorAll("title"))
     console.log(data.querySelectorAll("channel").querySelectorAll("description"))
     const items = data.querySelectorAll("item");
-    let html = ``;
+
     items.forEach(el => {
       console.log(el.querySelector("title"))
       console.log(el.querySelector("enclosure url"))
@@ -31,7 +31,8 @@ fetch(RSS_URL2)
         }
       )
 
-}
+    }
+  )}
 
 
 window.addEventListener('DOMContentLoaded', event => {
