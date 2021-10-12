@@ -5,7 +5,7 @@
 */
 //
 // Scripts
-// 
+//
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
     };
 
-    // Shrink the navbar 
+    // Shrink the navbar
     navbarShrink();
 
     // Shrink the navbar when page is scrolled
@@ -52,3 +52,8 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+function get_clip() {
+  // I need to go get the rss feed information and present something in the log);
+  console.log('test');
+}
