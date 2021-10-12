@@ -27,8 +27,8 @@ fetch(RSS_URL2)
 
     items.forEach(el => {
       console.log(el.querySelector("title"))
-      console.log(el.querySelector("enclosure url"))
-      console.log(el.querySelector("podcast: transcript url"))
+      console.log(el.querySelector("enclosure").url)
+      console.log(el.querySelector("podcast: transcript").url)
         }
       )
 
