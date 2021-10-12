@@ -7,6 +7,23 @@
 // Scripts
 //
 
+function get_clip() {
+  var elID = event.target.id;
+  var RSS_URL = document.getElementById(elID).value;
+
+  // I need to go get the rss feed information and present something in the log);
+  console.log('test');
+  console.log(RSS_URL)
+  const RSS_URL = `https://codepen.io/picks/feed/`;
+
+fetch(RSS_URL)
+  .then(response => response.text())
+  .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+  .then(data => console.log(data))
+
+}
+
+
 window.addEventListener('DOMContentLoaded', event => {
 
     // Navbar shrink function
@@ -52,19 +69,3 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
-
-function get_clip() {
-  var elID = event.target.id;
-  var RSS_URL = document.getElementById(elID).value;
-
-  // I need to go get the rss feed information and present something in the log);
-  console.log('test');
-  console.log(RSS_URL)
-  const RSS_URL = `https://codepen.io/picks/feed/`;
-
-fetch(RSS_URL)
-  .then(response => response.text())
-  .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-  .then(data => console.log(data))
-
-}
