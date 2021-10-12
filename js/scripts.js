@@ -20,9 +20,9 @@ fetch(RSS_URL2)
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
     console.log(data);
-    console.log(data.querySelector("channel.title"))
-    console.log(data.querySelector("channel.description"))
-    const items = data.querySelector("channel.item");
+    console.log(data.querySelectorforAll("channel.title"))
+    console.log(data.querySelectorforAll("channel.description"))
+    const items = data.querySelectorforAll("channel.item");
 
     items.forEach(el => {
       console.log(el.querySelector("title"))
