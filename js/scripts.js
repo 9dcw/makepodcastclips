@@ -18,7 +18,18 @@ function get_clip() {
 fetch(RSS_URL2)
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-  .then(data => console.log(data))
+  .then(data => {
+    console.log(data);
+    console.log(data.querySelectorAll("channel").querySelectorAll("title"))
+    console.log(data.querySelectorAll("channel").querySelectorAll("description"))
+    const items = data.querySelectorAll("item");
+    let html = ``;
+    items.forEach(el => {
+      console.log(el.querySelector("title"))
+      console.log(el.querySelector("enclosure url"))
+      console.log(el.querySelector("podcast: transcript url"))
+        }
+      )
 
 }
 
