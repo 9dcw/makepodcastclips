@@ -22,7 +22,7 @@ async function get_clip() {
 
   fetch(RSS_URL)
   .then(response => response.text())
-  .catch(error) {getElementById("process_status").innerHTML = 'error ' + error;
+  .catch(function(error) {getElementById("process_status").innerHTML = 'error ' + error;
                 promise.reject(error)})
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
@@ -53,6 +53,9 @@ async function get_clip() {
     })
   }
 
+function handleError() {
+  return
+}
 
 async function request_clip(download_url) {
   document.getElementById("process_status").innerHTML = 'selected episode'
