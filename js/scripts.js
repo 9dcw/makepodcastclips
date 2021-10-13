@@ -18,7 +18,7 @@ function get_clip() {
 // for a random element
 //const randomElement = array[Math.floor(Math.random() * array.length)];
 // then I send that link to the server to give me a clip
-
+const episodes = [];
 
 fetch(RSS_URL2)
   .then(response => response.text())
@@ -26,30 +26,47 @@ fetch(RSS_URL2)
   .then(data => {
     console.log(data);
 
-    console.log(data.querySelector("channel"))
-    console.log(data.querySelector("channel").querySelector("title"))
-    console.log(data.querySelector("channel").querySelector("description"))
+    //console.log(data.querySelector("channel"))
+    //console.log(data.querySelector("channel").querySelector("title"))
+    //console.log(data.querySelector("channel").querySelector("description"))
     const items = data.querySelector("channel").querySelectorAll("item");
 
     items.forEach(el => {
-      console.log(el.querySelector("title"))
-      console.log(el.querySelector("enclosure").getAttribute('url'))
-
+      //console.log(el.querySelector("title"))
+      //console.log(el.querySelector("enclosure").getAttribute('url'))
+      episodes.push(el.querySelector("enclosure").getAttribute('url'))
 
       //console.log(el.querySelector("podcast: transcript").url)
         }
       )
     })
 
-    let test_mp3_url = 'https://www.buzzsprout.com/126848/9310030-joe-henrich-on-cultural-evolution.mp3'
-    clip_url = request_clip(test_mp3_url)
-
+    let sel = episodes[Math.floor(Math.random() * episodes.length)]
+    clip_url = request_clip(sel)
+    window.open(clip_url, '_blank')
     // then I need to pull up that clip!
   }
 
 
 function request_clip(download_url) {
 
+
+  let clip_url = ''
+  let form = new FormData();
+  form.append('episode_url',download_url);
+
+  fetch('https://harvesting.ninja/process_rss', {
+      method: 'POST',
+      body: form
+  })
+      .then(function(response) {
+          console.log(response.text());
+          return response.text()
+      } )
+      .catch(error => $("#status").html(error)
+      )
+      .then(clip_url=> clip_url.replace(/\"/g, ""))
+      $("#status").html('processed! you may now refresh');
 
   return clip_url
 }
