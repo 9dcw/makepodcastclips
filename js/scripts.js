@@ -43,7 +43,6 @@ fetch(RSS_URL2)
 
     let sel = episodes[Math.floor(Math.random() * episodes.length)]
     clip_url = await request_clip(sel)
-    window.open(clip_url, '_blank')
     // then I need to pull up that clip!
   }
 
@@ -67,6 +66,7 @@ async function request_clip(download_url) {
       )
       .then(clip_url=> clip_url.replace(/\"/g, ""))
 
+      window.open(clip_url, '_blank')
 
   return clip_url
 }
