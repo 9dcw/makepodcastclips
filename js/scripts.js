@@ -7,7 +7,7 @@
 // Scripts
 //
 
-function get_clip() {
+async function get_clip() {
   var elID = event.target.id;
   target_el = elID.replace('-button','')
   var RSS_URL = document.getElementById(target_el).value;
