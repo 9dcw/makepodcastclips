@@ -48,7 +48,7 @@ async function get_clip() {
       console.log(rnd)
       let sel = episodes[rnd]
       console.log(sel)
-      //clip_url = await request_clip(sel)
+      clip_url = await request_clip(sel)
       // then I need to pull up that clip!
 
 
