@@ -10,10 +10,11 @@
 async function get_clip() {
   var elID = event.target.id;
   target_el = elID.replace('-button','')
+  document.getElementById("process_status").innerHTML = elID;
+
   var RSS_URL = document.getElementById(target_el).value;
-
   console.log(RSS_URL)
-
+  document.getElementById("process_status").innerHTML = 'getting ' + RSS_URL
   // for a random element
   //const randomElement = array[Math.floor(Math.random() * array.length)];
   // then I send that link to the server to give me a clip
@@ -24,6 +25,7 @@ async function get_clip() {
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
     console.log(data);
+    document.getElementById("process_status").innerHTML = 'got data'
 
     //console.log(data.querySelector("channel"))
     //console.log(data.querySelector("channel").querySelector("title"))
@@ -51,6 +53,7 @@ async function get_clip() {
 
 
 async function request_clip(download_url) {
+  document.getElementById("process_status").innerHTML = 'selected episode'
 
   console.log(download_url)
   let clip_url = ''
@@ -63,13 +66,20 @@ async function request_clip(download_url) {
   })
       .then(function(response) {
           return response.text()
+          document.getElementById("process_status").innerHTML = 'received clip'
+
       } )
-      .catch(error => console.log(error)
+      .catch(function(error) {
+        console.log(error)
+        document.getElementById("process_status").innerHTML = 'error! ' + error
+        }
       )
       .then(function (text) {
+
         console.log(text)
         clip_url= text.replace(/\"/g, "")
         console.log(clip_url)
+        document.getElementById("process_status").innerHTML = 'link to clip! ' + clip_url
 
       }).then(function () {
         window.open(clip_url, '_blank')
