@@ -59,13 +59,14 @@ async function request_clip(download_url) {
       body: form
   })
       .then(function(response) {
-          console.log(response.text());
           return response.text()
       } )
       .catch(error => console.log(error)
       )
-      .then(clip_url=> clip_url.replace(/\"/g, ""))
-
+      .then(function (text) {
+        clip_url= text.replace(/\"/g, "")
+      })
+      
       window.open(clip_url, '_blank')
 
   return clip_url
