@@ -66,7 +66,7 @@ function request_clip(download_url) {
       .catch(error => $("#status").html(error)
       )
       .then(clip_url=> clip_url.replace(/\"/g, ""))
-      $("#status").html('processed! you may now refresh');
+      //$("#status").html('processed! you may now refresh');
 
   return clip_url
 }
