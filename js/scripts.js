@@ -41,10 +41,11 @@ fetch(RSS_URL)
       )
     })
     console.log(episodes)
-
-    let sel = episodes[Math.floor(Math.random() * episodes.length)]
+    var rnd = Math.floor(Math.random() * episodes.length);
+    console.log(rnd)
+    let sel = episodes[rnd]
     console.log(sel)
-    clip_url = await request_clip(sel)
+    //clip_url = await request_clip(sel)
     // then I need to pull up that clip!
   }
 
