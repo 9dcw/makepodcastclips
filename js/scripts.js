@@ -35,11 +35,12 @@ fetch(RSS_URL)
       //console.log(el.querySelector("title"))
       //console.log(el.querySelector("enclosure").getAttribute('url'))
       episodes.push(el.querySelector("enclosure").getAttribute('url'))
-      console.log(el.querySelector("enclosure").getAttribute('url'))
+      //console.log(el.querySelector("enclosure").getAttribute('url'))
       //console.log(el.querySelector("podcast: transcript").url)
         }
       )
     })
+    console.log(episodes)
 
     let sel = episodes[Math.floor(Math.random() * episodes.length)]
     console.log(sel)
