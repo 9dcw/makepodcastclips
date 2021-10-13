@@ -41,6 +41,10 @@ fetch(RSS_URL)
       )
     })
     console.log(episodes)
+    console.log(episodes.length)
+    var rndnum = Math.random()
+    console.log(rndnum)
+    console.log(episodes.length * Math.random())
     var rnd = Math.floor(Math.random() * episodes.length);
     console.log(rnd)
     let sel = episodes[rnd]
