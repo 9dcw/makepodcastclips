@@ -38,16 +38,11 @@ async function get_clip() {
         }
       )
     }).then(function () {
-      console.log(episodes)
-      console.log(episodes.length)
 
       var rndnum = Math.random()
-      console.log(rndnum)
-      console.log(episodes.length * Math.random())
+      //console.log(rndnum)
       var rnd = Math.floor(Math.random() * episodes.length);
-      console.log(rnd)
       let sel = episodes[rnd]
-      console.log(sel)
       clip_url = request_clip(sel)
       // then I need to pull up that clip!
 
