@@ -64,7 +64,10 @@ async function request_clip(download_url) {
       .catch(error => console.log(error)
       )
       .then(function (text) {
+        console.log(text)
         clip_url= text.replace(/\"/g, "")
+        console.log(clip_url)
+
       }).then(function () {
         window.open(clip_url, '_blank')
       })
