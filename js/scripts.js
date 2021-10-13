@@ -13,7 +13,6 @@ async function get_clip() {
   var RSS_URL = document.getElementById(target_el).value;
 
   console.log(RSS_URL)
-  var RSS_URL = `https://feeds.buzzsprout.com/126848.rss`;
 
   // for a random element
   //const randomElement = array[Math.floor(Math.random() * array.length)];
