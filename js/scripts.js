@@ -63,10 +63,10 @@ function request_clip(download_url) {
           console.log(response.text());
           return response.text()
       } )
-      .catch(error => $("#status").html(error)
+      .catch(error => console.log(error)
       )
       .then(clip_url=> clip_url.replace(/\"/g, ""))
-      //$("#status").html('processed! you may now refresh');
+      
 
   return clip_url
 }
