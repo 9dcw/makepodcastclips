@@ -13,14 +13,14 @@ async function get_clip() {
   var RSS_URL = document.getElementById(target_el).value;
 
   console.log(RSS_URL)
-  var RSS_URL2 = `https://feeds.buzzsprout.com/126848.rss`;
+  var RSS_URL = `https://feeds.buzzsprout.com/126848.rss`;
 
-// for a random element
-//const randomElement = array[Math.floor(Math.random() * array.length)];
-// then I send that link to the server to give me a clip
-var episodes = [];
+  // for a random element
+  //const randomElement = array[Math.floor(Math.random() * array.length)];
+  // then I send that link to the server to give me a clip
+  var episodes = [];
 
-fetch(RSS_URL)
+  fetch(RSS_URL)
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
@@ -33,25 +33,26 @@ fetch(RSS_URL)
 
     items.forEach(el => {
       //console.log(el.querySelector("title"))
-      //console.log(el.querySelector("enclosure").getAttribute('url'))
       episodes.push(el.querySelector("enclosure").getAttribute('url'))
-      //console.log(el.querySelector("enclosure").getAttribute('url'))
       //console.log(el.querySelector("podcast: transcript").url)
         }
       )
+    }).then(function () {
+      console.log(episodes)
+      console.log(episodes.length)
+
+      var rndnum = Math.random()
+      console.log(rndnum)
+      console.log(episodes.length * Math.random())
+      var rnd = Math.floor(Math.random() * episodes.length);
+      console.log(rnd)
+      let sel = episodes[rnd]
+      console.log(sel)
+      //clip_url = await request_clip(sel)
+      // then I need to pull up that clip!
+
+
     })
-    console.log(episodes[0])
-    console.log(episodes)
-    console.log(episodes[0].length)
-    var rndnum = Math.random()
-    console.log(rndnum)
-    console.log(episodes.length * Math.random())
-    var rnd = Math.floor(Math.random() * episodes.length);
-    console.log(rnd)
-    let sel = episodes[rnd]
-    console.log(sel)
-    //clip_url = await request_clip(sel)
-    // then I need to pull up that clip!
   }
 
 
