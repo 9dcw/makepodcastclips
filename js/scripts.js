@@ -35,13 +35,14 @@ fetch(RSS_URL)
       //console.log(el.querySelector("title"))
       //console.log(el.querySelector("enclosure").getAttribute('url'))
       episodes.push(el.querySelector("enclosure").getAttribute('url'))
-
+      console.log(el.querySelector("enclosure").getAttribute('url'))
       //console.log(el.querySelector("podcast: transcript").url)
         }
       )
     })
 
     let sel = episodes[Math.floor(Math.random() * episodes.length)]
+    console.log(sel)
     clip_url = await request_clip(sel)
     // then I need to pull up that clip!
   }
