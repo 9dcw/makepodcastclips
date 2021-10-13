@@ -18,7 +18,7 @@ async function get_clip() {
 // for a random element
 //const randomElement = array[Math.floor(Math.random() * array.length)];
 // then I send that link to the server to give me a clip
-const episodes = [];
+var episodes = [];
 
 fetch(RSS_URL)
   .then(response => response.text())
