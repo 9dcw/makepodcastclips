@@ -17,7 +17,7 @@ function get_clip() {
 
 // for a random element
 //const randomElement = array[Math.floor(Math.random() * array.length)];
-// then I send that to the server!
+// then I send that link to the server to give me a clip
 
 
 fetch(RSS_URL2)
@@ -33,7 +33,6 @@ fetch(RSS_URL2)
 
     items.forEach(el => {
       console.log(el.querySelector("title"))
-      console.log(el.querySelector("enclosure"))
       console.log(el.querySelector("enclosure").getAttribute('url'))
 
 
@@ -43,9 +42,17 @@ fetch(RSS_URL2)
     })
 
     let test_mp3_url = 'https://www.buzzsprout.com/126848/9310030-joe-henrich-on-cultural-evolution.mp3'
+    clip_url = request_clip(test_mp3_url)
 
+    // then I need to pull up that clip!
   }
 
+
+function request_clip(download_url) {
+
+
+  return clip_url
+}
 
 window.addEventListener('DOMContentLoaded', event => {
 
