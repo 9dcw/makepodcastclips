@@ -49,7 +49,7 @@ fetch(RSS_URL)
 
 async function request_clip(download_url) {
 
-
+  console.log(download_url)
   let clip_url = ''
   let form = new FormData();
   form.append('episode_url',download_url);
