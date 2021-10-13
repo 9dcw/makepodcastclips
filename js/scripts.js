@@ -20,7 +20,7 @@ async function get_clip() {
 // then I send that link to the server to give me a clip
 const episodes = [];
 
-fetch(RSS_URL2)
+fetch(RSS_URL)
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
