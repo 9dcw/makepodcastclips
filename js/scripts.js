@@ -89,7 +89,9 @@ async function request_clip(download_url) {
         console.log(text)
         clip_url= text.replace(/\"/g, "")
         console.log(clip_url)
-        document.getElementById("process_status").innerHTML = 'link to clip! ' + clip_url
+        document.getElementById("process_status")
+        .innerHTML = '<a href="'+clip_url+'"" target="_blank">Click here for the clip!</a>'
+
 
       }).then(function () {
         window.open(clip_url, '_blank')
@@ -155,9 +157,6 @@ if (isValid()) {
 
         console.log(text)
         clip_url= text.replace(/\"/g, "")
-        console.log(clip_url)
-        document.getElementById("process_status")
-        .innerHTML = '<a href="'+clip_url+'"" target="_blank">Click here for the clip!</a>'
 
       }).then(function () {
         window.open(clip_url, '_blank')
