@@ -181,10 +181,10 @@ function isValid() {
 window.addEventListener('DOMContentLoaded', event => {
 
   // load up the form fields
-  fields.name = document.getElementById('name').value;
-  fields.email = document.getElementById('email').value;
-  fields.phone = document.getElementById('phone').value;
-  fields.message = document.getElementById('message').value;
+  fields.name = document.getElementById('name');
+  fields.email = document.getElementById('email');
+  fields.phone = document.getElementById('phone');
+  fields.message = document.getElementById('message');
 
 
     // Navbar shrink function
