@@ -23,6 +23,8 @@
   --bs-cyan: #0dcaf0;
   --bs-white: #fff;
   --bs-ninjagreen: #739D07;
+  --bs-ninjagrey: #262626;
+
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
   --bs-gray-100: #f8f9fa;
@@ -11301,6 +11303,7 @@ html {
 .page-section .page-section-heading {
   font-size: 2.25rem;
   line-height: 2rem;
+  color: var(--bs-ninjagrey);
 }
 @media (min-width: 992px) {
   .page-section .page-section-heading {
@@ -11331,14 +11334,15 @@ html {
   margin-left: 1rem;
 }
 .divider-custom .divider-custom-icon {
-  color: #2c3e50;
+  color: var(--bs-ninjagrey);
   font-size: 2rem;
 }
 .divider-custom.divider-light .divider-custom-line {
-  background-color: #fff;
+  background-color: var(--bs-ninjagrey);
+
 }
 .divider-custom.divider-light .divider-custom-icon {
-  color: #fff;
+  color: var(--bs-ninjagrey);
 }
 
 .btn-xl {
@@ -11440,6 +11444,7 @@ html {
 .masthead .masthead-heading {
   font-size: 2.75rem;
   line-height: 2.75rem;
+  color: var(--bs-ninjagrey)
 }
 .masthead .masthead-subheading {
   font-size: 1.25rem;
