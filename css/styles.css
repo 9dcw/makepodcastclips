@@ -3072,8 +3072,8 @@ textarea.form-control-lg {
 }
 .btn-secondary:hover {
   color: #fff;
-  background-color: #253544;
-  border-color: #233240;
+  background-color: var(--bs-ninjagreen);
+  border-color: var(--bs-ninjagreen);
 }
 .btn-check:focus + .btn-secondary, .btn-secondary:focus {
   color: #fff;
@@ -4447,7 +4447,10 @@ textarea.form-control-lg {
 .navbar-light .navbar-brand {
   color: rgba(0, 0, 0, 0.9);
 }
-.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+.navbar-brand:hover {
+  color: var(--ninjagreen)
+}
+.navbar-light .navbar-light .navbar-brand:focus {
   color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-nav .nav-link {
