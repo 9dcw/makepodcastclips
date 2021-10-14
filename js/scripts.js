@@ -7,6 +7,8 @@
 // Scripts
 //
 
+var fields = {};
+
 async function get_clip() {
   var elID = event.target.id;
   target_el = elID.replace('-button','')
@@ -97,7 +99,94 @@ async function request_clip(download_url) {
   return clip_url
 }
 
+
+function isNotEmpty(value) {
+ if (value == null || typeof value == 'undefined' ) return false;
+ return (value.length > 0);
+}
+
+
+function isEmail(email) {
+ let regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+ return regex.test(String(email).toLowerCase());
+}
+
+
+function fieldValidation(field, validationFunction) {
+ if (field == null) return false;
+
+ let isFieldValid = validationFunction(field.value)
+ if (!isFieldValid) {
+
+   // I have a different class for this
+
+ field.className = 'placeholderRed';
+ } else {
+ field.className = '';
+ }
+
+ return isFieldValid;
+}
+
+
+function sendContact() {
+if (isValid()) {
+  // activate the successful element
+  let form = new FormData();
+  form.append('name',fields.name);
+  form.append('email',fields.email);
+  form.append('message',fields.message);
+
+  fetch('https://harvesting.ninja/contact_form', {
+      method: 'POST',
+      body: form
+  })
+      .then(function(response) {
+          return response.text()
+          document.getElementById("process_status").innerHTML = 'received clip'
+
+      } )
+      .catch(function(error) {
+        console.log(error)
+        document.getElementById("process_status").innerHTML = 'error! ' + error
+        }
+      )
+      .then(function (text) {
+
+        console.log(text)
+        clip_url= text.replace(/\"/g, "")
+        console.log(clip_url)
+        document.getElementById("process_status")
+        .innerHTML = '<a href="'+clip_url+'"" target="_blank">Click here for the clip!</a>'
+
+      }).then(function () {
+        window.open(clip_url, '_blank')
+
+      })
+
+
+}
+
+}
+
+
+function isValid() {
+  var valid = true;
+  valid &= fieldValidation(fields.name, isNotEmpty);
+  valid &= fieldValidation(fields.email, isEmail);
+  valid &= fieldValidation(fields.message, isNotEmpty);
+
+}
+
+
 window.addEventListener('DOMContentLoaded', event => {
+
+  // load up the form fields
+  fields.name = document.getElementByID('name');
+  fields.email = document.getElementByID('email');
+  fields.phone = document.getElementByID('phone');
+  fields.message = document.getElementByID('message');
+
 
     // Navbar shrink function
     var navbarShrink = function () {
