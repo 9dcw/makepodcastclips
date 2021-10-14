@@ -22,8 +22,11 @@ async function get_clip() {
 
   fetch(RSS_URL)
   .then(response => response.text())
-  .catch(function(error) {getElementById("process_status").innerHTML = 'error ' + error;
-                promise.reject(error)})
+  .catch(function(error) {
+                getElementById("process_status")
+                .innerHTML = 'error ' + error;
+                promise.reject(error)
+              })
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
     console.log(data);
