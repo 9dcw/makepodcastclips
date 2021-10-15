@@ -87,6 +87,7 @@ function searchPodcasts() {
       term = term.replace(' ', '+')
       var params = term //+ callback
       console.log(baseURL + params)
+      document.getElementById("process_status").innerHTML = '';
 
       const myNode = document.getElementById("search results");
       while (myNode.firstChild) {
