@@ -64,14 +64,21 @@ function handleError() {
 
 var searchCounter;
 
+function pushResults(results){
+
+    console.log(results)
+
+}
+
 function searchPodcasts() {
 
       //https://itunes.apple.com/search?
-      var baseURL = 'https://itunes.apple.com/search?media=podcast&term='
-      var params = document.getElementById("selected_podcast").value
-      params = params.replace(' ', '+')
+      var baseURL = 'https://itunes.apple.com/search?media=podcast'
+      var term = '&term=' + document.getElementById("selected_podcast").value
+      var callback = '&callback=pushResults'
+      term = term.replace(' ', '+')
+      var params = term + callback
       console.log(baseURL + params)
-
 
       fetch(baseURL + params, {
           method: 'GET'
@@ -89,11 +96,6 @@ function searchPodcasts() {
             document.getElementById("process_status").innerHTML = 'error! ' + error
             }
           )
-          .then(function (json) {
-
-            console.log(json)
-
-          })
         }
 
 async function request_clip(download_url) {
