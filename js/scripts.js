@@ -65,7 +65,7 @@ async function get_clip() {
       //console.log(rndnum)
       var rnd = Math.floor(Math.random() * episodes.length);
       let sel = episodes[rnd]
-      clip_url = request_clip(sel)
+      clip_url = request_clip(sel, podcast_name)
       // then I need to pull up that clip!
 
 
@@ -136,13 +136,16 @@ function searchPodcasts() {
         );
       }
 
-async function request_clip(download_url) {
-  document.getElementById("process_status").innerHTML = 'selected episode'
+async function request_clip(download_url, episode_name) {
+  let update_text = "<p>selected episode</p><p>Now I'm processing a clip for you. Hang in there!</p>"
+  document.getElementById("process_status").innerHTML = update_text
 
   console.log(download_url)
   let clip_url = ''
   let form = new FormData();
   form.append('episode_url',download_url);
+  form.append('episode_name',episode_name);
+
 
   fetch('https://harvesting.ninja/process_rss', {
       method: 'POST',
