@@ -45,9 +45,18 @@ async function get_clip() {
 
     items.forEach(el => {
       //console.log(el.querySelector("title"))
-      
-      episodes.push(el.querySelector("enclosure").getAttribute('url'))
+      try {
+
+        episodes.push(el.querySelector("enclosure").getAttribute('url'))
+
       //console.log(el.querySelector("podcast: transcript").url)
+
+        }
+        catch(err) {
+          console.log('no download for an episode')
+          document.getElementById("process_status").innerHTML = 'no download for this episode!'
+        }
+
         }
       )
     }).then(function () {
@@ -78,7 +87,11 @@ function searchPodcasts() {
       term = term.replace(' ', '+')
       var params = term //+ callback
       console.log(baseURL + params)
-      $('#search results').html('');
+
+      const myNode = document.getElementById("search results");
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.lastChild);
+      }
 
       $.ajax({
           url: baseURL + params,
