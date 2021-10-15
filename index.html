@@ -47,17 +47,13 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Enter a Podcast RSS Feed and Get a Clip!</p>
+                <p class="masthead-subheading font-weight-light mb-0">Search For a Podcast and Get a Clip!</p>
             </div>
 
             <!--input class="form-floating mb-3" id="rss-finder" type="text"
                 placeholder="Enter an RSS Feed" onkeypress="searchPodcasts()"-->
                 <input class="form-floating mb-3" type="search" list="podcasts"
                 id=selected_podcast>
-                <datalist id="podcasts">
-                  <option value="Not Unreasonable Podcast">
-
-                </datalist>
 
                 <button id="rss-finder-button" class="btn-secondary" onclick="searchPodcasts()">Search</button>
               </input>
@@ -164,6 +160,7 @@
         </div>
         <!-- Portfolio Modals-->
         <!-- Bootstrap core JS-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>

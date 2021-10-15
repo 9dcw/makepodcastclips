@@ -8,13 +8,18 @@
 //
 
 var fields = {};
+var podcasts = {}
+
+
 
 async function get_clip() {
-  var elID = event.target.id;
-  target_el = elID.replace('-button','')
-  document.getElementById("process_status").innerHTML = elID;
 
-  var RSS_URL = document.getElementById(target_el).value;
+
+
+  var podcast_name = document.getElementById('podcast_list').value;
+  console.log(podcast_name)
+  RSS_URL = podcasts[podcast_name]
+
   console.log(RSS_URL)
   document.getElementById("process_status").innerHTML = 'getting ' + RSS_URL
   // for a random element
@@ -25,8 +30,7 @@ async function get_clip() {
   fetch(RSS_URL)
   .then(response => response.text())
   .catch(function(error) {
-                getElementById("process_status")
-                .innerHTML = 'error ' + error;
+                document.getElementById("process_status").innerHTML = 'error ' + error;
                 promise.reject(error)
               })
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
@@ -41,6 +45,7 @@ async function get_clip() {
 
     items.forEach(el => {
       //console.log(el.querySelector("title"))
+      
       episodes.push(el.querySelector("enclosure").getAttribute('url'))
       //console.log(el.querySelector("podcast: transcript").url)
         }
@@ -62,41 +67,60 @@ function handleError() {
   return
 }
 
-var searchCounter;
-
-function pushResults(results){
-
-    console.log(results)
-
-}
 
 function searchPodcasts() {
 
       //https://itunes.apple.com/search?
       var baseURL = 'https://itunes.apple.com/search?media=podcast'
       var term = '&term=' + document.getElementById("selected_podcast").value
-      var callback = '&callback=pushResults'
+
+      var limit = '&limit=10'
       term = term.replace(' ', '+')
-      var params = term + callback
+      var params = term //+ callback
       console.log(baseURL + params)
+      $('#search results').html('');
 
-      fetch(baseURL + params, {
-          method: 'GET'
+      $.ajax({
+          url: baseURL + params,
+          dataType: "jsonp",
+          success: function( response ) {
+              //console.log(response.results);
+              var container = document.getElementById('search results');
+              for (var member in podcasts) delete podcasts[member]
 
-      })
-          .then(function(response) {
-              let json_response = response.text()
-              console.log(json_response)
+              var datalist = document.createElement("select");
+              datalist.id = 'podcast_list';
+              for (let i = 0; i < response.results.length; i++) {
+                    console.log(response.results[i]['collectionName']);
+                    let name = response.results[i]['collectionName']
+                    podcasts[name] = response.results[i]['feedUrl']
+                    var newOptionElement = document.createElement("option");
 
-              return json_response
+                    newOptionElement.value = name
+                    newOptionElement.text = name;
+                    datalist.appendChild(newOptionElement);
 
-          } )
-          .catch(function(error) {
-            console.log(error)
-            document.getElementById("process_status").innerHTML = 'error! ' + error
+                    }
+                    var label = document.createElement("label");
+                  label.innerHTML = "Choose your podcast for a clip! "
+                  label.htmlFor = "podcast_list";
+                  console.log('podcast_array')
+
+                  console.log(podcasts)
+                  container.appendChild(datalist)
+                  var submitter = document.createElement("button");
+                  submitter.id = 'submit_podcast'
+                  //submitter.onclick='get_clip()'
+                  submitter.setAttribute( "onClick", "get_clip();" );
+                  submitter.innerHTML="Get A Clip!"
+                  submitter.setAttribute( "class", "btn-secondary" );
+                  container.appendChild(submitter)
+
             }
-          )
-        }
+
+          }
+        );
+      }
 
 async function request_clip(download_url) {
   document.getElementById("process_status").innerHTML = 'selected episode'
@@ -116,7 +140,7 @@ async function request_clip(download_url) {
 
       } )
       .catch(function(error) {
-        console.log(error)
+
         document.getElementById("process_status").innerHTML = 'error! ' + error
         }
       )
