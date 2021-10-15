@@ -50,12 +50,19 @@
                 <p class="masthead-subheading font-weight-light mb-0">Enter a Podcast RSS Feed and Get a Clip!</p>
             </div>
 
-            <input class="form-floating mb-3" id="rss-finder" type="text"
-                placeholder="Enter an RSS Feed">
+            <!--input class="form-floating mb-3" id="rss-finder" type="text"
+                placeholder="Enter an RSS Feed" onkeypress="searchPodcasts()"-->
+                <input class="form-floating mb-3" type="search" list="podcasts"
+                id=selected_podcast>
+                <datalist id="podcasts">
+                  <option value="Not Unreasonable Podcast">
 
-                <button id="rss-finder-button" class="btn-secondary" onclick="get_clip()">Geneate a Clip!</button>
+                </datalist>
+
+                <button id="rss-finder-button" class="btn-secondary" onclick="searchPodcasts()">Search</button>
               </input>
               <div id="process_status"></div>
+              <div id="search results"></div>
 
         </header>
         <!-- Portfolio Section-->

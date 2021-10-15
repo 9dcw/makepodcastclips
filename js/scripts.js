@@ -62,6 +62,40 @@ function handleError() {
   return
 }
 
+var searchCounter;
+
+function searchPodcasts() {
+
+      //https://itunes.apple.com/search?
+      var baseURL = 'https://itunes.apple.com/search?media=podcast&term='
+      var params = document.getElementById("selected_podcast").value
+      params = params.replace(' ', '+')
+      console.log(baseURL + params)
+
+
+      fetch(baseURL + params, {
+          method: 'GET'
+
+      })
+          .then(function(response) {
+              let json_response = response.text()
+              console.log(json_response)
+
+              return json_response
+
+          } )
+          .catch(function(error) {
+            console.log(error)
+            document.getElementById("process_status").innerHTML = 'error! ' + error
+            }
+          )
+          .then(function (json) {
+
+            console.log(json)
+
+          })
+        }
+
 async function request_clip(download_url) {
   document.getElementById("process_status").innerHTML = 'selected episode'
 
