@@ -90,6 +90,8 @@ function handleError() {
 
 
 function genlookalikes(podcast_index) {
+  document.getElementById("process_status").innerHTML = 'getting your lookalikes, be right back!';
+
   let podcast_string = JSON.stringify(podcasts_obj[podcast_index])
   let podcasts_string = JSON.stringify(podcasts_obj)
   let form = new FormData();
@@ -216,7 +218,6 @@ async function searchPodcasts() {
       term = term.replace(' ', '+')
       var params = term + limit
       console.log(baseItunesURL + params)
-      document.getElementById("process_status").innerHTML = '';
 
       //const myNode = document.getElementById("search results");
     //  while (myNode.firstChild) {
@@ -235,7 +236,6 @@ async function modalshow() {
         term = term.replace(' ', '+')
         var params = term + limit
         console.log(baseItunesURL + params)
-        document.getElementById("process_status").innerHTML = '';
 
         //const myNode = document.getElementById("search results");
       //  while (myNode.firstChild) {
@@ -245,6 +245,7 @@ async function modalshow() {
         console.log(podcasts_obj);
 
         getPodcasts(params).then(result=>{
+            document.getElementById("process_status").innerHTML = '';
 
             savePodcasts()
             console.log(podcasts_obj);
