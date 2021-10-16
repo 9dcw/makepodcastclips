@@ -89,9 +89,36 @@ function handleError() {
 }
 
 
-function genlookalikes(podcast) {
-    var genre = podcasts[podcast]
-    getPodcasts(params)
+function genlookalikes(podcast_index) {
+  let podcast_string = JSON.stringify(podcasts_obj[podcast_index])
+  let podcasts_string = JSON.stringify(podcasts_obj)
+  let form = new FormData();
+  console.log('getting lookalikes for ' + podcast_string)
+  form.append('podcasts_json',podcasts_string);
+  form.append('podcast', podcast_string);
+
+  fetch('https://harvesting.ninja/get_podcast_lookalikes', {
+      method: 'POST',
+      body: form
+  })
+      .then(function(response) {
+          receipt = response.json()
+          //console.log(receipt)
+          return receipt
+
+      } )
+      .catch(function(error) {
+        console.log("there was an error")
+        console.log(error)
+        }
+      ).then(function(response) {
+        podcasts_obj = response//JSON.parse(response)
+        $('#modal1').modal('hide');
+        modalshow()
+
+      })
+
+
 
   }
 
@@ -156,8 +183,11 @@ async function getPodcasts(params) {
 
 async function savePodcasts() {
 
+  console.log('saving podcasts')
   let form = new FormData();
-  form.append('podcasts_json',podcasts_obj);
+  const podcasts_JSON = JSON.stringify(podcasts_obj);
+
+  form.append('podcasts_json',podcasts_JSON);
 
 
   fetch('https://harvesting.ninja/receive_podcast_list', {
@@ -215,6 +245,7 @@ async function modalshow() {
         console.log(podcasts_obj);
 
         getPodcasts(params).then(result=>{
+
             savePodcasts()
             console.log(podcasts_obj);
 
@@ -279,7 +310,8 @@ async function modalshow() {
               td = document.createElement('td')
               td.setAttribute("class","btn-secondary")
               newlink = document.createElement('button');
-              newlink.setAttribute('href', '');
+              onclickfn = 'genlookalikes('+i+')'
+              newlink.setAttribute('onclick', onclickfn);
               newlink.setAttribute('data-bs-dismiss', 'modal');
 
               text = document.createTextNode('More Podcasts Like This!');
@@ -306,7 +338,9 @@ async function request_clip(download_url, episode_name) {
   let update_text = "<p>selected episode</p><p>Now I'm processing a clip for you. Hang in there!</p>"
   document.getElementById("process_status").innerHTML = update_text
 
-  console.log(download_url)
+  console.log('url for extension:' + download_url)
+  console.log('name for saving:' + episode_name)
+
   let clip_url = ''
   let form = new FormData();
   form.append('episode_url',download_url);
