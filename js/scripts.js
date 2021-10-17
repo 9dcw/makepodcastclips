@@ -312,7 +312,8 @@ async function modalshow() {
 
 
 async function request_clip(download_url, episode_name) {
-  let update_text = "<p>selected episode</p><p>Now I'm processing a clip for you. Hang in there!</p>"
+  let update_text = "<p>selected episode: " + episode_name +
+  "</p><p>Now I'm processing a clip for you. Hang in there!</p>"
   document.getElementById("process_status").innerHTML = update_text
 
   console.log('url for extension:' + download_url)
