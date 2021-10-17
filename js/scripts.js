@@ -204,6 +204,42 @@ async function searchPodcasts() {
     }
 
 
+function toggleText() {
+  let buttonID = event.target.id;
+  // Get all the elements from the page
+  let targetID = elID + "_toggle_text"
+
+  var showMoreText =
+      document.getElementById(targetID);
+
+  var buttonText =
+      document.getElementById(elID);
+
+  // to be displayed is already set to
+  // 'none' (that is hidden) then this
+  // section of code triggers
+  if (showMoreText.style.display === "none") {
+
+      // Change the text on button to
+      // 'Show More'
+      buttonText.innerHTML = "Show More";
+  }
+
+  // If the hidden portion is revealed,
+  // we will change it back to be hidden
+  else {
+
+      // Show the text between the
+      // span elements
+      showMoreText.style.display = "inline";
+
+      // Change the text on button
+      // to 'Show Less'
+      buttonText.innerHTML = "Show Less";
+  }
+
+}
+
   //$('#modal1').on('show.bs.modal', function (event) {
 async function modalshow() {
         var term = '&term=' + document.getElementById("selected_podcast").value
@@ -258,6 +294,11 @@ async function modalshow() {
             thead.appendChild(th)
 
             th = document.createElement("th");
+            text = document.createTextNode('Subscribe!');
+            th.appendChild(text);
+            thead.appendChild(th)
+
+            th = document.createElement("th");
             text = document.createTextNode('Get More!');
             th.appendChild(text);
             thead.appendChild(th)
@@ -267,10 +308,27 @@ async function modalshow() {
               row = tbody.insertRow();
               podcast_name = podcasts_obj[i]['collectionName']
               td = document.createElement('td')
+              td.setAttribute('align', 'left')
+
               text = document.createTextNode(podcast_name);
               td.appendChild(text);
-              row.appendChild(td);
 
+              br = document.createElement('br')
+              td.appendChild(br);
+
+              //"http://rss.acast.com/coffeebreakspanish"
+              moreText = document.createElement('a')
+              moreText.setAttribute('href', podcasts_obj[i]['collectionViewUrl']);
+              moreText.setAttribute('target', '_blank');
+
+              moreText.innerHTML = 'by: ' +podcasts_obj[i]['artistName']
+              td.appendChild(moreText);
+              //moreText.setAttribute('id', 'cast_text_id_'+i+'_toggle_text');
+              //moreText.innerHTML =podcasts_obj[i]['description']
+              //moreText.setAttribute('display', 'none')
+              //td.appendChild(moreText);
+
+              row.appendChild(td);
               // buttons
 
               td = document.createElement('td')
@@ -283,6 +341,18 @@ async function modalshow() {
               newlink.setAttribute('data-bs-dismiss', 'modal');
               td.appendChild(newlink);
               row.appendChild(td);
+
+              td = document.createElement('td')
+              td.setAttribute("class","btn-secondary")
+              newlink = document.createElement('button');
+              onclickfn = 'subscribe('+i+')'
+              newlink.setAttribute('onclick', onclickfn);
+              newlink.setAttribute('data-bs-dismiss', 'modal');
+              text = document.createTextNode('Subscribe!');
+              newlink.appendChild(text);
+              td.appendChild(newlink);
+              row.appendChild(td);
+
 
               td = document.createElement('td')
               td.setAttribute("class","btn-secondary")
@@ -312,8 +382,7 @@ async function modalshow() {
 
 
 async function request_clip(download_url, episode_name) {
-  let update_text = "<p>selected episode: " + episode_name +
-  "</p><p>Now I'm processing a clip for you. Hang in there!</p>"
+  let update_text = "<p>selected episode: " + episode_name + "</p><p>Now I'm processing a clip for you. Hang in there!</p>"
   document.getElementById("process_status").innerHTML = update_text
 
   console.log('url for extension:' + download_url)
