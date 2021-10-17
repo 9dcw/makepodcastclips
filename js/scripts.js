@@ -306,6 +306,7 @@ async function modalshow() {
             for (let i = 0; i < podcasts_obj.length; i++) {
 
               row = tbody.insertRow();
+              row.setAttribute('vertical-align', 'middle')
               podcast_name = podcasts_obj[i]['collectionName']
               td = document.createElement('td')
               td.setAttribute('align', 'left')
