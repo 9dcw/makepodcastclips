@@ -14,7 +14,8 @@ var baseItunesURL = 'https://itunes.apple.com/search?media=podcast'
 
 
 async function get_clip_with_podcast_index(podcast_index) {
-  RSS_URL =  podcasts_obj[podcast_index]['feedUrl']
+
+  RSS_URL = podcasts_obj[podcast_index]['feedUrl']
   await get_clip_with_RSS(RSS_URL)
 
 }
@@ -25,22 +26,39 @@ async function get_clip_with_RSS(RSS_URL) {
   //const randomElement = array[Math.floor(Math.random() * array.length)];
   // then I send that link to the server to give me a clip
   var episodes = [];
+  console.log(RSS_URL)
 
-  fetch(RSS_URL)
+  wrapper_url = 'https://harvesting.ninja/cors_workaround?destination='
+  final_url = wrapper_url + RSS_URL
+  console.log(final_url)
+
+  fetch(final_url)
+
   .then(response => response.text())
   .catch(function(error) {
+                console.log(error)
                 document.getElementById("process_status").innerHTML = 'error ' + error;
-                promise.reject(error)
+                throw error
               })
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
     console.log(data);
     document.getElementById("process_status").innerHTML = 'got data'
 
-    //console.log(data.querySelector("channel"))
-    //console.log(data.querySelector("channel").querySelector("title"))
-    //console.log(data.querySelector("channel").querySelector("description"))
-    const items = data.querySelector("channel").querySelectorAll("item");
+    //try {
+      const channel = data.querySelector("channel")
+      console.log(channel)
+      const items = channel.querySelectorAll("item");
+      console.log(items)
+    //}
+
+
+    //catch(err) {
+    //  console.log('error!')
+    //  document.getElementById("process_status").innerHTML = JSON.stringify(data)
+
+    //}
+    console.log(items)
 
     items.forEach(el => {
       //console.log(el.querySelector("title"))
@@ -61,13 +79,11 @@ async function get_clip_with_RSS(RSS_URL) {
     }).then(function () {
 
       var rndnum = Math.random()
-      //console.log(rndnum)
+      console.log(episodes)
       var rnd = Math.floor(Math.random() * episodes.length);
       let sel = episodes[rnd]
       clip_url = request_clip(sel, podcast_name)
       // then I need to pull up that clip!
-
-
     })
 
 }
@@ -130,51 +146,10 @@ async function getPodcasts(params) {
       url: baseItunesURL + params,
       dataType: "jsonp",
       success: function( response ) {
-          //console.log(response.results);
-          //var container = document.getElementById('search results');
-          //for (var member in podcasts) delete podcasts[member]
           for (var member in podcasts_obj) delete podcasts_obj[member]
 
           podcasts_obj = response.results;
           console.log(podcasts_obj)
-          /*var datalist = document.createElement("select");
-          datalist.id = 'podcast_list';
-
-          for (let i = 0; i < podcasts_obj.length; i++) {
-
-                console.log(podcasts_obj[i]['collectionName']);
-                let name = podcasts_obj[i]['collectionName']
-                var newOptionElement = document.createElement("option");
-
-                newOptionElement.value = name
-                newOptionElement.text = name;
-                datalist.appendChild(newOptionElement);
-
-                }
-                var label = document.createElement("label");
-              label.innerHTML = "Choose your podcast for a clip! "
-              label.htmlFor = "podcast_list";
-
-              container.appendChild(datalist)
-              var submitter = document.createElement("button");
-              submitter.id = 'submit_podcast'
-              //submitter.onclick='get_clip()'
-              submitter.setAttribute( "onClick", "get_clip();" );
-              submitter.innerHTML="Get A Clip!"
-              submitter.setAttribute( "class", "btn-secondary" );
-              container.appendChild(submitter)
-              var label = document.createElement("br");
-              container.appendChild(label)
-
-            var suggester = document.createElement("button");
-            suggester.id = 'suggest_podcast'
-            //submitter.onclick='get_clip()'
-            suggester.setAttribute( "onClick", "suggest_podcast();" );
-            suggester.innerHTML="Suggest some other podcasts for me like this one!"
-            suggester.setAttribute( "class", "btn-secondary" );
-            container.appendChild(suggester)*/
-
-
         }
 
       }
@@ -190,6 +165,7 @@ async function savePodcasts() {
   const podcasts_JSON = JSON.stringify(podcasts_obj);
 
   form.append('podcasts_json',podcasts_JSON);
+
 
 
   fetch('https://harvesting.ninja/receive_podcast_list', {
