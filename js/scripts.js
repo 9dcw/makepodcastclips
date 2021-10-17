@@ -346,8 +346,8 @@ async function modalshow() {
               td = document.createElement('td')
               td.setAttribute("class","btn-secondary")
               newlink = document.createElement('button');
-              onclickfn = 'subscribe('+i+')'
-              newlink.setAttribute('onclick', onclickfn);
+              newlink.setAttribute('href', podcasts_obj[i]['collectionViewUrl']);
+              newlink.setAttribute('target', '_blank');
               newlink.setAttribute('data-bs-dismiss', 'modal');
               text = document.createTextNode('Subscribe!');
               newlink.appendChild(text);
