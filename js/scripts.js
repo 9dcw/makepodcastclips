@@ -47,9 +47,10 @@ async function get_clip_with_RSS(RSS_URL) {
 
     //try {
       const channel = data.querySelector("channel")
+      console.log('channel')
       console.log(channel)
       const items = channel.querySelectorAll("item");
-      console.log(items)
+      console.log('items')
     //}
 
 
@@ -165,7 +166,6 @@ async function savePodcasts() {
   const podcasts_JSON = JSON.stringify(podcasts_obj);
 
   form.append('podcasts_json',podcasts_JSON);
-
 
 
   fetch('https://harvesting.ninja/receive_podcast_list', {
