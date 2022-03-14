@@ -133,7 +133,7 @@ function genlookalikes(podcast_index) {
       ).then(function(response) {
         podcasts_obj = response//JSON.parse(response)
         $('#modal1').modal('hide');
-        modalshow()
+        showsmodal()
 
       })
 
@@ -241,7 +241,7 @@ function toggleText() {
 }
 
   //$('#modal1').on('show.bs.modal', function (event) {
-async function modalshow() {
+async function showsmodal() {
         var term = '&term=' + document.getElementById("selected_podcast").value
 
         var limit = '&limit=10'
@@ -300,6 +300,11 @@ async function modalshow() {
 
             th = document.createElement("th");
             text = document.createTextNode('Get More!');
+            th.appendChild(text);
+            thead.appendChild(th)
+
+            th = document.createElement("th");
+            text = document.createTextNode('Specify Episode!');
             th.appendChild(text);
             thead.appendChild(th)
 
@@ -362,7 +367,19 @@ async function modalshow() {
               newlink.setAttribute('onclick', onclickfn);
               newlink.setAttribute('data-bs-dismiss', 'modal');
 
-              text = document.createTextNode('More Podcasts Like This!');
+              text = document.createTextNode('Podcasts Like This!');
+              newlink.appendChild(text);
+              td.appendChild(newlink);
+              row.appendChild(td);
+
+              td = document.createElement('td')
+              td.setAttribute("class","btn-secondary")
+              newlink = document.createElement('button');
+              onclickfn = 'getepisodes('+i+')'
+              newlink.setAttribute('onclick', onclickfn);
+              newlink.setAttribute('data-bs-dismiss', 'modal');
+
+              text = document.createTextNode('See Episodes!');
               newlink.appendChild(text);
               td.appendChild(newlink);
               row.appendChild(td);
