@@ -133,7 +133,7 @@ function genlookalikes(podcast_index) {
       ).then(function(response) {
         podcasts_obj = response//JSON.parse(response)
         $('#modal1').modal('hide');
-        showsmodal()
+        showsModal()
 
       })
 
@@ -240,8 +240,129 @@ function toggleText() {
 
 }
 
+async function episodesmodal() {
+  var term = '&term=' + document.getElementById("selected_podcast").value
+
+  var limit = '&limit=10'
+  term = term.replace(' ', '+')
+  var params = term + limit
+  console.log(baseItunesURL + params)
+
+  //const myNode = document.getElementById("search results");
+//  while (myNode.firstChild) {
+  //  myNode.removeChild(myNode.lastChild);
+  //}
+  console.log('modal show function')
+  console.log(podcasts_obj);
+
+  getPodcasts(params).then(result=>{
+      document.getElementById("process_status").innerHTML = '';
+
+      savePodcasts()
+      console.log(podcasts_obj);
+
+      //var button = $(event.relatedTarget) // Button that triggered the modal
+      //var recipient = button.data('whatever') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+
+      const myNode = document.getElementById("results_table_container");
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.lastChild);
+      }
+
+      let table = document.createElement("table");
+
+      table.setAttribute("class","table")
+      let tbody = document.createElement('tbody');
+      let td = document.createElement('td')
+
+      table.appendChild(tbody);
+      //let insert_text = ''
+      let thead = table.createTHead();
+
+      //let row = thead.insertRow();
+      let th = document.createElement("th");
+      let text = document.createTextNode('Name');
+      th.appendChild(text);
+      thead.appendChild(th)
+
+      th = document.createElement("th");
+      text = document.createTextNode('Get Clip!');
+      th.appendChild(text);
+      thead.appendChild(th)
+
+      th = document.createElement("th");
+      text = document.createTextNode('Subscribe!');
+      th.appendChild(text);
+      thead.appendChild(th)
+
+
+      for (let i = 0; i < podcasts_obj.length; i++) {
+
+        row = tbody.insertRow();
+        row.setAttribute('vertical-align', 'middle')
+        podcast_name = podcasts_obj[i]['collectionName']
+        td = document.createElement('td')
+        td.setAttribute('align', 'left')
+
+        text = document.createTextNode(podcast_name);
+        td.appendChild(text);
+
+        br = document.createElement('br')
+        td.appendChild(br);
+
+        //"http://rss.acast.com/coffeebreakspanish"
+        moreText = document.createElement('a')
+        moreText.setAttribute('href', podcasts_obj[i]['collectionViewUrl']);
+        moreText.setAttribute('target', '_blank');
+
+        moreText.innerHTML = 'by: ' +podcasts_obj[i]['artistName']
+        td.appendChild(moreText);
+        //moreText.setAttribute('id', 'cast_text_id_'+i+'_toggle_text');
+        //moreText.innerHTML =podcasts_obj[i]['description']
+        //moreText.setAttribute('display', 'none')
+        //td.appendChild(moreText);
+
+        row.appendChild(td);
+        // buttons
+
+        td = document.createElement('td')
+        td.setAttribute("class","btn-secondary")
+        newlink = document.createElement('button');
+        onclickfn = 'get_clip_with_podcast_index('+i+')'
+        newlink.setAttribute('onclick', onclickfn);
+        text = document.createTextNode('Try a clip!');
+        newlink.appendChild(text);
+        newlink.setAttribute('data-bs-dismiss', 'modal');
+        td.appendChild(newlink);
+        row.appendChild(td);
+
+        td = document.createElement('td')
+        td.setAttribute("class","btn-secondary")
+        newlink = document.createElement('button');
+        newlink.setAttribute('href', podcasts_obj[i]['collectionViewUrl']);
+        newlink.setAttribute('target', '_blank');
+        newlink.setAttribute('data-bs-dismiss', 'modal');
+        text = document.createTextNode('Subscribe!');
+        newlink.appendChild(text);
+        td.appendChild(newlink);
+        row.appendChild(td);
+
+
+      }
+
+      document.getElementById('results_table_container').appendChild(table)
+      document.getElementById('above_text').innerHTML = '<br>'
+
+    //})
+    $('#modal1').modal('show');
+
+  })
+  }
+
   //$('#modal1').on('show.bs.modal', function (event) {
-async function showsmodal() {
+async function showsModal() {
         var term = '&term=' + document.getElementById("selected_podcast").value
 
         var limit = '&limit=10'
